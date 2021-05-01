@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PECommerce</title>
+    <%- include('partials/csslinks') -%>
+  </head>
+  <body>
+    <!-- View Card -->
+    <div class="container justify-items-center">
+      <div class="card mb-3 col-12">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="<%= item.imgLink%>" alt="There must be an image" />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= item.title %></h5>
+              <p class="card-text"><%= item.description %></p>
+              <p class="card-text">
+                <span class="font-italics font-weigth-light">Price: </span>
+                <%= item.new_price %> ₹
+              </p>
+              <!-- 
+              <a href="/products/buy/"
+                ><button class="btn btn-warning">Add to Cart</button></a
+              > -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <%- include('partials/scripts') -%>
+  </body>
+</html>

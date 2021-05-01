@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PECommerce</title>
+    <%- include('partials/csslinks') -%>
+  </head>
+  <body>
+    <% if(!user){ %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">PECommerce</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Sign Up / Log In</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <%- include('partials/maindiv') -%> <%- include('partials/services')-%> <% }
+    else{ if(user.position == 'user'){%>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">PECommerce</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Products</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Orders
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/myorders">My Orders</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/myproducts">My Products</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/sellItem">Sell Item</a>
+              <div class="dropdown-divider"></div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <form action="/auth/logout" class="pt-1" method="post">
+              <button class="btn btn-sm btn-light">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <%} else{ %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">PECommerce</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Orders</a>
+          </li>
+          <li class="nav-item">
+            <form action="/auth/logout" class="pt-1" method="post">
+              <button class="btn btn-sm btn-light">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <%}%>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-6 order-2 order-md-1 mt-5">
+          <div class="pl-5">
+            <div class="row justify-content-center mb-5">
+              <h3 class="display-3">Personal Information</h3>
+            </div>
+            <div class="mb-3">
+              <h5 class="">Username</h5>
+              <p class="font-italic font-weight-light h2">
+                <%= user.username %>
+              </p>
+            </div>
+            <div class="mb-3">
+              <h5 class="">Email</h5>
+              <p class="font-italic font-weight-light h2"><%= user.email %></p>
+            </div>
+            <div class="mb-3">
+              <h5 class="">Address</h5>
+              <p class="font-italic font-weight-light h2">
+                <%= user.address %>
+              </p>
+            </div>
+            <div class="mb-3">
+              <h5 class="">Contact</h5>
+              <p class="font-italic font-weight-light h2">
+                <%= user.contact %>
+              </p>
+            </div>
+            <div class="mb-3">
+              <h5 class="">Position</h5>
+              <p class="font-italic font-weight-light h2">
+                <%= user.position %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 order-md-2 order-1 mt-5 overflow-hidden">
+          <img src="img/pi.svg" alt="svg image" height="400" width="auto" />
+        </div>
+      </div>
+    </div>
+    <% } %> <%- include('partials/scripts') -%>
+  </body>
+</html>

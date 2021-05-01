@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/csslinks') -%>
+    <title>PECommerce</title>
+    <style>
+      img:hover {
+        transform: scale(1.1);
+        z-index: 99;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">PECommerce</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/products">Products</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Orders
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/myorders">My Orders</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/myproducts">My Products</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/sellItem">Sell Item</a>
+              <div class="dropdown-divider"></div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <form action="/auth/logout" class="pt-1" method="post">
+              <button class="btn btn-sm btn-light">Logout</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- main section -->
+    <!-- breadcrumb -->
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            My Products
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Items on sale by logged in user -->
+    <% if(items){ items.forEach((item,index)=>{ %> <% console.log(item.imgLink)
+    %>
+    <div class="card mb-3 col-12 offset-md-3 col-md-6">
+      <div class="row g-0">
+        <div class="col-md-6 mt-2">
+          <img
+            class="rounded img-thumbnail"
+            style="height: 200px !important; width: 300px !important"
+            src="<%=  item.imgLink %>"
+            alt="There must be an image"
+          />
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h6 class="card-text font-italic font-weight-light">
+              ItemID: <%= item.itemId %>
+            </h6>
+            <h5 class="card-title"><%= item.title %></h5>
+            <p class="card-text">
+              <%= item.description.substring(0,50) + '...' %>
+            </p>
+            <p class="card-text">
+              <span class="font-italics font-weigth-light">Price: </span>
+              <%= item.price %> ₹
+            </p>
+
+            <!-- Add href as /products/delete/:itemId 
+            update into itemBooked and item table
+            then redirect to / route-->
+            <a href="/products/delete/<%= item.itemId%>"
+              ><button class="btn btn-danger">Delete</button></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <%}) } %>
+    <!-- scripts -->
+    <%- include('partials/scripts') -%>
+  </body>
+</html>
